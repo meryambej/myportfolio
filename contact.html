@@ -1,12 +1,128 @@
-<contact.html>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Contact</title>
-    </head>
-    <header>
-        <h1>Contact form</h1>
-    </header>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:400,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            color: #555;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        nav {
+            background: #800080; /* Solid purple color */
+            color: white;
+            padding: 10px;
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: block;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav li:hover {
+            transform: translateX(10px);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #dab2f1;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        section {
+            text-align: center;
+            background-color: #fff; /* Container background color */
+            padding: 30px; /* Added padding */
+            border-radius: 10px; /* Added border-radius for a rounded look */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
+            max-width: 600px; /* Reduced max-width */
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #72008c;
+        }
+
+        form {
+            max-width: 400px; /* Adjusted form max-width */
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #72008c;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #800080; /* Purple color for the submit button */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #dab2f1; /* Lighter purple on hover */
+        }
+
+        footer {
+            background-color: rgb(237, 188, 249); /* Adjusted lighter blue color */
+            color: rgb(46, 46, 46);
+            padding: 20px; /* Added more padding */
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow for a subtle effect */
+        }
+    </style>
+</head>
+
+<body>
+
     <nav>
         <ul>
             <li><a href="index.html">About me </a></li>
@@ -15,21 +131,27 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-    <body>
-    
-    <h2>Fill in this :</h2>
-    
-    <form action="/submit_contact_info" method="post">
-        <label for="fname">Name:</label><br>
-        <input type="text" id="fname" name="name"><br>
-        <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email"><br>
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
-        <input type="submit" value="Submit">
-    </form> 
+
+    <main>
+        <section>
+            <h2><i class="fa-solid fa-envelope"></i> Contact form</h2>
+
+            <form action="/submit_contact_info" method="post">
+                <label for="fname">Name:</label><br>
+                <input type="text" id="fname" name="name"><br>
+                <label for="email">Email:</label><br>
+                <input type="text" id="email" name="email"><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
+        </section>
+    </main>
+
     <footer>
-        <p>&copy; 2023  My Portfolio. All rights reserved.</p>
+        <p>&copy; 2023 My Portfolio. All rights reserved. Designed with ❤️</p>
     </footer>
-    </body>
-    </html>
+
+</body>
+
+</html>

@@ -1,69 +1,166 @@
-<about me html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Portfolio</title>
-    
-    </head>
-    <body>
-    
-        <header>
-            <h1>Welcome to My Portfolio</h1>
-        </header>
-        <nav>
-            <ul>
-                <li><a href="index.html">About me </a></li>
-                <li><a href="academic.html">Academic Background</a></li>
-                <li><a href="experiences.html">Experiences and Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    <head>
-        <title>About me</title>
-    </head>
-    <body>
-        <header>
-            <h1>About me</h1>
-            <img src="me2.jpg" width="250px">
-            <p> My name is Meryam Bejaoui. I am a 21-year-old IT engineering student at Esprit. 
-                After passing the entrance examination to engineering studies I am confident in my decision to pursue a career in Information Technology,
-                 as I have a genuine passion for technology and its ever-evolving nature. 
-                 I am excited to bring my skills and knowledge to the table and be a valuable contributor to the field.
+<!DOCTYPE html>
+<html lang="en">
 
-            </p>
-        </header>
-        <main>
-            <p
-            <section>
-                <h2>Languages spoken</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:400,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            color: #555;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        nav {
+            background: #800080; /* Solid purple color */
+            color: white;
+            padding: 10px;
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: block;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav li:hover {
+            transform: translateX(10px);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #dab2f1;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        section {
+            text-align: center;
+            background-color: #fff; /* Container background color */
+            padding: 30px; /* Added padding */
+            border-radius: 10px; /* Added border-radius for a rounded look */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
+            max-width: 600px; /* Reduced max-width */
+            margin: 0 auto;
+        }
+
+        header img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            max-width: 100%;
+        }
+
+        header img:hover {
+            transform: scale(1.1);
+        }
+
+        h1,
+        h2 {
+            color: #72008c;
+        }
+
+        ul {
+            list-style: none; /* Remove bullets */
+            padding: 0;
+        }
+
+        footer {
+            background-color: rgb(237, 188, 249); /* Adjusted lighter blue color */
+            color: rgb(46, 46, 46);
+            padding: 20px; /* Added more padding */
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow for a subtle effect */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">About me </a></li>
+            <li><a href="academic.html">Academic Background</a></li>
+            <li><a href="experiences.html">Experiences and Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <header>
+                <h1><i class="fa-solid fa-user"></i> About me</h1>
+                <img src="me2.jpg" width="250px" alt="Meryam Bejaoui">
+                <p> 👩🏻‍💻 My name is Meryam Bejaoui. I am a 21-year-old IT engineering student at Esprit.
+                    After passing the entrance examination to engineering studies, I am confident in my decision to pursue a career in Information Technology, as I have a genuine passion for technology and its ever-evolving nature. I am excited to bring my skills and knowledge to the table and be a valuable contributor to the field.
+                </p>
+
+                <h2><i class="fa-solid fa-language"></i> Languages spoken</h2>
                 <ul>
-                    <li>Arabic </li>
-                    <li>French </li>
-                    <li>English </li>
-                    <li>German</li>
-    
+                    <li>• Arabic </li>
+                    <li>• French </li>
+                    <li>• English </li>
+                    <li>• German</li>
                 </ul>
-    
-                <h2>Skills</h2>
+
+                <h2><i class="fa-sharp fa-solid fa-check"></i> Skills</h2>
                 <ul>
-                    <li>Problem-solving skills</li>
-                    <li>Numerical skills </li>
-                    <li>Mending skills</li>
+                    <li>• Problem-solving skills</li>
+                    <li>• Numerical skills </li>
+                    <li>• Mending skills</li>
                 </ul>
-    
-                <h2>Hobbies</h2>
+
+                <h2><i class="fa-brands fa-pagelines"></i> Hobbies</h2>
                 <ul>
-                    <li>Reading</li>
-                    <li>Writing </li>
-                    <li>Gardening</li> </li>
-    
-                </ul
-            </section>
-        </main>
-        <footer>
-            <p>&copy; 2023  My Portfolio. All rights reserved.</p>
-        </footer>
-    </body>
-    
-    </html>
+                    <li>• Reading</li>
+                    <li>• Writing </li>
+                    <li>• Gardening</li>
+                </ul>
+            </header>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 My Portfolio. All rights reserved. Designed with ❤️</p>
+    </footer>
+
+</body>
+
+</html>
+

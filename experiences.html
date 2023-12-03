@@ -1,16 +1,116 @@
-<experiences.html>
+
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>experiences and projects</title>
+    <title>Experiences and Projects</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:400,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            color: #555;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease-in-out;
+        }
 
+        nav {
+            background: #800080; /* Solid purple color */
+            color: white;
+            padding: 10px;
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: block;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav li:hover {
+            transform: translateX(10px);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #dab2f1;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        section {
+            text-align: center;
+            background-color: #fff; /* Container background color */
+            padding: 30px; /* Added padding */
+            border-radius: 10px; /* Added border-radius for a rounded look */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
+            max-width: 600px; /* Reduced max-width */
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #72008c;
+        }
+
+        ul {
+            list-style: none; /* Remove bullets */
+            padding: 0;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px; /* Added border-radius for a rounded look */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: rgb(237, 188, 249); /* Adjusted lighter blue color */
+            color: rgb(46, 46, 46);
+            padding: 20px; /* Added more padding */
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow for a subtle effect */
+        }
+
+        .cap {
+            display: flex;
+            justify-content: center;
+        }
+
+    </style>
 </head>
+
 <body>
 
-    <header>
-        <h1>My Experiences and Projects</h1>
-    </header>
     <nav>
         <ul>
             <li><a href="index.html">About me </a></li>
@@ -19,40 +119,36 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-</nav>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experiences and Projects</title>
-</head>
-<body>
-  
+
     <main>
         <section>
-            <h2>Experiences</h2>
+            <h2><i class="fa-solid fa-paperclip"></i> Experiences</h2>
             <ul>
-               
-                <li> System Administration at Capgemini: Managed and maintained a network of 100+ computers, ensuring 99.9% uptime at Cap
-                    Implemented robust backup and recovery solutions, reducing data loss incidents by 30%.</li>
-                     <img src="eng.png" width="250px">
-                <li>Cybersecurity at BIAT Bank: Developed and implemented a comprehensive security policy, reducing the number of security incidents by 40%. </li>
-                <img src="biat.jpg" width="250px">
-                <li>Vendor Management at Telnet: Negotiated contracts with IT vendors, resulting in a 15% cost reduction for hardware and software procurement. </li>
-                <img src="telnet.jpg" width="250px">
+                <li>• System Administration at Capgemini: Managed and maintained a network of 100+ computers, ensuring 99.9% uptimeImplemented robust backup and recovery solutions, reducing data loss incidents by 30%.
+                    <div class="cap">
+                        <img src="eng.png" width="250px" alt="Capgemini Logo"> 
+                    </div>
+                </li>
+                <li>• Cybersecurity at BIAT Bank: Developed and implemented a comprehensive security policy, reducing the number of security incidents by 40%. 
+                    <img src="biat.jpg" width="250px" alt="BIAT Bank Logo"></li>
+                <li>• Vendor Management at Telnet: Negotiated contracts with IT vendors, resulting in a 15% cost reduction for hardware and software procurement. 
+                    <img src="telnet.jpg" width="250px" alt="Telnet Logo"></li>
             </ul>
 
-            <h2>Projects</h2>
+            <h2><i class="fa-solid fa-list-check"></i> Projects</h2>
             <ul>
-                <li>Smart room project: Designed and implemented a Smart Room Automation System to enhance user comfort, energy efficiency,
-                     and overall convenience within a residential or office space.</li>
-                <li>LifeFlow application :lDeveloped a mobile application aimed at streamlining and encouraging blood donation processes,
-                     connecting donors with blood banks, and creating a supportive community for potential donors.</li>
+                <li>👾 Smart room project: Designed and implemented a Smart Room Automation System to enhance user comfort, energy efficiency,
+                    and overall convenience within a residential or office space.</li>
+                <li>👾 LifeFlow application: Developed a mobile application aimed at streamlining and encouraging blood donation processes,
+                    connecting donors with blood banks, and creating a supportive community for potential donors.</li>
             </ul>
         </section>
     </main>
+
     <footer>
-        <p>&copy; 2023  My Portfolio. All rights reserved.</p>
+        <p>&copy; 2023 My Portfolio. All rights reserved. Designed with ❤️</p>
     </footer>
+
 </body>
 
 </html>
