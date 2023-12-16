@@ -119,6 +119,200 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
         }
     </style>
+     <script>
+        function validateName() {
+            var nameInput = document.getElementById('fname');
+            var nameError = document.getElementById('nameError');
+            var name = nameInput.value.trim();
+
+            if (name.length < 2) {
+                nameError.textContent = 'Name must be at least 2 characters long.';
+                nameInput.classList.add('error');
+            } else {
+                nameError.textContent = '';
+                nameInput.classList.remove('error');
+            }
+        }
+
+        function validateEmail() {
+            var emailInputs = document.getElementsByName('email');
+            var emailError = document.getElementById('emailError');
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var valid = true;
+
+            for (var i = 0; i < emailInputs.length; i++) {
+                var email = emailInputs[i].value.trim();
+                if (!emailRegex.test(email)) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (!valid) {
+                emailError.textContent = 'Please enter valid email addresses.';
+            } else {
+                emailError.textContent = '';
+            }
+        }
+
+        function validateMessage() {
+            var messageInput = document.getElementById('message');
+            var messageError = document.getElementById('messageError');
+            var message = messageInput.value.trim();
+
+            if (message === '') {
+                messageError.textContent = 'Please enter a message.';
+                messageInput.classList.add('error');
+            } else {
+                messageError.textContent = '';
+                messageInput.classList.remove('error');
+            }
+        }
+
+        function validateUrgency() {
+            var urgencyError = document.getElementById('urgencyError');
+            var urgentRadio = document.getElementById('urgent');
+            var notUrgentRadio = document.getElementById('notUrgent');
+
+            if (!urgentRadio.checked && !notUrgentRadio.checked) {
+                urgencyError.textContent = 'Please select urgency.';
+            } else {
+                urgencyError.textContent = '';
+            }
+        }
+
+        function addEmailInput() {
+            var container = document.getElementById('emailContainer');
+            var newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.name = 'email';
+            newInput.placeholder = 'Enter email';
+            newInput.oninput = validateEmail;
+            container.appendChild(newInput);
+        }
+
+        function resetForm() {
+            document.getElementById('contactForm').reset();
+            // Add additional logic if needed
+        }
+
+        function confirmSubmit() {
+            return confirm('Are you sure you want to submit the form?');
+        }
+
+        function submitForm() {
+            var nameInput = document.getElementById('fname');
+            var emailInputs = document.getElementsByName('email');
+            var messageInput = document.getElementById('message');
+            var fileInput = document.getElementById('fileInput');
+            var urgencyError = document.getElementById('urgencyError');
+            var urgentRadio = document.getElementById('urgent');
+            var notUrgentRadio = document.getElementById('notUrgent');
+
+            validateName();
+            validateEmail();
+            validateMessage();
+            validateUrgency();
+
+            // Check if there are any validation errors
+            if (
+                nameInput.classList.contains('error') ||
+                messageInput.classList.contains('error') ||
+                (!urgentRadio.checked && !notUrgentRadio.checked)
+            ) {
+                return false; // Prevent form submission if there are errors
+            }
+
+            // Additional validation for email inputs
+            for (var i = 0; i < emailInputs.length; i++) {
+                if (emailInputs[i].classList.contains('error')) {
+                    return false; // Prevent form submission if there are errors in email inputs
+                }
+            }
+
+            // Fetch API for asynchronous form submission
+            var formData = new FormData(document.getElementById('contactForm'));
+            formData.append('file', fileInput.files[0]); // Append the file to the form data
+
+            if (confirmSubmit()) {
+                fetch('/submit_contact_info', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response from the server
+                        console.log(data);
+                        // Display a success message or handle errors
+                        alert('Form submitted successfully!');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Display an error message to the user
+                        alert('An error occurred while submitting the form.');
+                    })
+                    .finally(() => {
+                        // Hide the loading spinner or perform other cleanup tasks
+                    });
+            }
+
+            return false; // Prevent the default form submission
+        }
+        function updateCharacterCount() {
+            var messageInput = document.getElementById('message');
+            var charCount = document.getElementById('charCount');
+            var message = messageInput.value.trim();
+            charCount.textContent = message.length;
+        }
+
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById('password');
+            passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showScrollButton() {
+            var scrollToTopButton = document.getElementById('scrollToTop');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopButton.style.display = 'block';
+            } else {
+                scrollToTopButton.style.display = 'none';
+            }
+        }
+
+        function handleFileSelect(input) {
+            var fileInput = input.files[0];
+            var preview = document.getElementById('imagePreview');
+
+            if (fileInput) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(fileInput);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Show scroll-to-top button on scroll
+            window.onscroll = function () {
+                showScrollButton();
+            };
+        });
+    </script>
 </head>
 
 <body>
@@ -136,14 +330,34 @@
         <section>
             <h2><i class="fa-solid fa-envelope"></i> Contact form</h2>
 
-            <form action="/submit_contact_info" method="post">
+            <form id="contactForm" onsubmit="return submitForm()" enctype="multipart/form-data">
                 <label for="fname">Name:</label><br>
-                <input type="text" id="fname" name="name"><br>
+                <input type="text" id="fname" name="name" oninput="validateName()"><br>
+                <div id="nameError" style="color: red;"></div>
+
                 <label for="email">Email:</label><br>
-                <input type="text" id="email" name="email"><br>
+                <div id="emailContainer">
+                    <input type="text" name="email" placeholder="Enter email" oninput="validateEmail()"><br>
+                </div>
+                <div id="emailError" style="color: red;"></div>
+                <button type="button" onclick="addEmailInput()">Add Another Email</button><br>
+
                 <label for="message">Message:</label><br>
-                <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+                <textarea id="message" name="message" rows="4" cols="50" oninput="validateMessage(); updateCharacterCount();"></textarea><br>
+                <div id="messageError" style="color: red;"></div>
+                <div>Character Count: <span id="charCount">0</span></div>
+
+                <label>Urgency:</label><br>
+                <input type="radio" id="urgent" name="urgency" onclick="validateUrgency()"> Urgent
+                <input type="radio" id="notUrgent" name="urgency" onclick="validateUrgency()"> Not Urgent
+                <div id="urgencyError" style="color: red;"></div>
+
+                <label for="fileInput">File:</label><br>
+                <input type="file" id="fileInput" name="fileInput" onchange="handleFileSelect(this)"><br>
+                <img id="imagePreview" style="max-width: 100%;" alt="Image Preview">
+
                 <input type="submit" value="Submit">
+                <button type="button" onclick="resetForm()">Reset Form</button>
             </form>
         </section>
     </main>
