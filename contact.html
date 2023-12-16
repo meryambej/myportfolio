@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:400,700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
@@ -21,7 +20,7 @@
         }
 
         nav {
-            background: #800080; 
+            background: #800080;
             color: white;
             padding: 10px;
             box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
@@ -68,11 +67,11 @@
 
         section {
             text-align: center;
-            background-color: #fff; 
-            padding: 30px; 
-            border-radius: 10px; 
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
-            max-width: 600px; 
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -81,7 +80,7 @@
         }
 
         form {
-            max-width: 400px; 
+            max-width: 400px;
             margin: 0 auto;
         }
 
@@ -91,7 +90,8 @@
             color: #72008c;
         }
 
-        input, textarea {
+        input,
+        textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -101,25 +101,25 @@
         }
 
         input[type="submit"] {
-            background-color: #800080; 
+            background-color: #800080;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease-in-out;
         }
 
         input[type="submit"]:hover {
-            background-color: #dab2f1; 
+            background-color: #dab2f1;
         }
 
         footer {
-            background-color: rgb(237, 188, 249); 
+            background-color: rgb(237, 188, 249);
             color: rgb(46, 46, 46);
-            padding: 20px; 
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
-     <script>
+    <script>
         function validateName() {
             var nameInput = document.getElementById('fname');
             var nameError = document.getElementById('nameError');
@@ -192,8 +192,21 @@
         }
 
         function resetForm() {
-            document.getElementById('contactForm').reset();
-            // Add additional logic if needed
+            var form = document.getElementById('contactForm');
+            form.reset();
+            resetValidation();
+        }
+
+        function resetValidation() {
+            var inputs = document.querySelectorAll('.error');
+            inputs.forEach(function (input) {
+                input.classList.remove('error');
+            });
+
+            var errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(function (errorMessage) {
+                errorMessage.textContent = '';
+            });
         }
 
         function confirmSubmit() {
@@ -201,63 +214,66 @@
         }
 
         function submitForm() {
-            var nameInput = document.getElementById('fname');
-            var emailInputs = document.getElementsByName('email');
-            var messageInput = document.getElementById('message');
-            var fileInput = document.getElementById('fileInput');
-            var urgencyError = document.getElementById('urgencyError');
-            var urgentRadio = document.getElementById('urgent');
-            var notUrgentRadio = document.getElementById('notUrgent');
+            var formData = new FormData();
 
-            validateName();
-            validateEmail();
-            validateMessage();
-            validateUrgency();
+    var nameInput = document.getElementById('fname');
+    var emailInputs = document.getElementsByName('email');
+    var messageInput = document.getElementById('message');
+    var fileInput = document.getElementById('fileInput');
+    var urgencyError = document.getElementById('urgencyError');
+    var urgentRadio = document.getElementById('urgent');
+    var notUrgentRadio = document.getElementById('notUrgent');
 
-            // Check if there are any validation errors
-            if (
-                nameInput.classList.contains('error') ||
-                messageInput.classList.contains('error') ||
-                (!urgentRadio.checked && !notUrgentRadio.checked)
-            ) {
-                return false; // Prevent form submission if there are errors
-            }
+    validateName();
+    validateEmail();
+    validateMessage();
+    validateUrgency();
 
-            // Additional validation for email inputs
-            for (var i = 0; i < emailInputs.length; i++) {
-                if (emailInputs[i].classList.contains('error')) {
-                    return false; // Prevent form submission if there are errors in email inputs
-                }
-            }
+    if (
+        nameInput.classList.contains('error') ||
+        messageInput.classList.contains('error') ||
+        (!urgentRadio.checked && !notUrgentRadio.checked)
+    ) {
+        console.log('Validation failed');
+        return false;
+    }
 
-            // Fetch API for asynchronous form submission
-            var formData = new FormData(document.getElementById('contactForm'));
-            formData.append('file', fileInput.files[0]); // Append the file to the form data
-
-            if (confirmSubmit()) {
-                fetch('/submit_contact_info', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Handle the response from the server
-                        console.log(data);
-                        // Display a success message or handle errors
-                        alert('Form submitted successfully!');
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        // Display an error message to the user
-                        alert('An error occurred while submitting the form.');
-                    })
-                    .finally(() => {
-                        // Hide the loading spinner or perform other cleanup tasks
-                    });
-            }
-
-            return false; // Prevent the default form submission
+    for (var i = 0; i < emailInputs.length; i++) {
+        if (emailInputs[i].classList.contains('error')) {
+            console.log('Validation failed for email');
+            return false;
         }
+    }
+
+    formData.append('name', nameInput.value.trim());
+    formData.append('message', messageInput.value.trim());
+    formData.append('urgency', urgentRadio.checked ? 'Urgent' : 'Not Urgent');
+
+    for (var i = 0; i < emailInputs.length; i++) {
+        formData.append('email', emailInputs[i].value.trim());
+    }
+
+    formData.append('file', fileInput.files[0]);
+
+    if (confirmSubmit()) {
+        fetch('/submit_contact_info', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Form submission successful:', data);
+            alert('Form submitted successfully!');
+        })
+        .catch(error => {
+            console.error('Error during form submission:', error);
+            alert('An error occurred while submitting the form.');
+        });
+    }
+
+    return false;
+        }
+
         function updateCharacterCount() {
             var messageInput = document.getElementById('message');
             var charCount = document.getElementById('charCount');
@@ -271,7 +287,10 @@
         }
 
         function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
         function showScrollButton() {
@@ -297,7 +316,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Add smooth scrolling for anchor links
+
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -307,12 +326,11 @@
                 });
             });
 
-            // Show scroll-to-top button on scroll
             window.onscroll = function () {
                 showScrollButton();
             };
         });
-    </script>
+        </script>
 </head>
 
 <body>
@@ -328,29 +346,29 @@
 
     <main>
         <section>
-            <h2><i class="fa-solid fa-envelope"></i> Contact form</h2>
+            <h2><i class="fas fa-envelope"></i> Contact form</h2>
 
             <form id="contactForm" onsubmit="return submitForm()" enctype="multipart/form-data">
                 <label for="fname">Name:</label><br>
                 <input type="text" id="fname" name="name" oninput="validateName()"><br>
-                <div id="nameError" style="color: red;"></div>
+                <div id="nameError" class="error-message" style="color: red;"></div>
 
                 <label for="email">Email:</label><br>
                 <div id="emailContainer">
                     <input type="text" name="email" placeholder="Enter email" oninput="validateEmail()"><br>
                 </div>
-                <div id="emailError" style="color: red;"></div>
+                <div id="emailError" class="error-message" style="color: red;"></div>
                 <button type="button" onclick="addEmailInput()">Add Another Email</button><br>
 
                 <label for="message">Message:</label><br>
                 <textarea id="message" name="message" rows="4" cols="50" oninput="validateMessage(); updateCharacterCount();"></textarea><br>
-                <div id="messageError" style="color: red;"></div>
+                <div id="messageError" class="error-message" style="color: red;"></div>
                 <div>Character Count: <span id="charCount">0</span></div>
 
                 <label>Urgency:</label><br>
                 <input type="radio" id="urgent" name="urgency" onclick="validateUrgency()"> Urgent
                 <input type="radio" id="notUrgent" name="urgency" onclick="validateUrgency()"> Not Urgent
-                <div id="urgencyError" style="color: red;"></div>
+                <div id="urgencyError" class="error-message" style="color: red;"></div>
 
                 <label for="fileInput">File:</label><br>
                 <input type="file" id="fileInput" name="fileInput" onchange="handleFileSelect(this)"><br>
@@ -358,13 +376,17 @@
 
                 <input type="submit" value="Submit">
                 <button type="button" onclick="resetForm()">Reset Form</button>
+                
             </form>
         </section>
     </main>
+    <button id="scrollToTop" onclick="scrollToTop()" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
+    
     <footer>
         <p>&copy; 2023 My Portfolio. All rights reserved. Designed with ❤️</p>
     </footer>
+
 
 </body>
 
